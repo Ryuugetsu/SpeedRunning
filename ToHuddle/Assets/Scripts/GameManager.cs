@@ -4,16 +4,39 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour {
 
+    [SerializeField] private GameObject quit;
     private bool canIncrease = true;    //variable to work the timeScale
 
 	// Use this for initialization
 	void Start () {
         Time.timeScale = 1; //set default timeScale
-	}
-	
-	// Update is called once per frame
-	void Update () {
-        
+        quit.SetActive(false);
+
+    }
+
+    // Update is called once per frame
+    void Update () {
+
+        //Quit
+        if (Input.GetButtonDown("Cancel"))
+        {
+
+            if (!quit.activeInHierarchy)
+            {
+                quit.SetActive(true);
+            }
+            else
+            {
+                quit.SetActive(false);
+            }
+        }
+        if (Input.GetButtonDown("Submit") && quit.activeInHierarchy)
+        {
+            Application.Quit();
+            Debug.Log("fechou");
+        }
+
+
         //TimeScale increase logic
         if (canIncrease)
         {
